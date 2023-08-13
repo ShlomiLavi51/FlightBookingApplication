@@ -42,10 +42,19 @@ public class Plane {
     @OneToOne
     private Flight flight;
     @ElementCollection
-    @CollectionTable(name = "flight_seats", joinColumns = @JoinColumn(name = "flight_id"))
-    @Column(name = "seat")
-    private Set<String> seats;
-    @ManyToOne
-    @JoinColumn(name = "card_id")
-    private Card cards;
+    @CollectionTable(name = "flight_firstClass",
+                     joinColumns = @JoinColumn(name = "flight_id"))
+    @Column(name = "firstClass")
+    private Set<String> firstClass;
+    @ElementCollection
+    @CollectionTable(name = "flight_economyClass",
+                     joinColumns = @JoinColumn(name = "flight_id"))
+    @Column(name = "economyClass")
+    private Set<String> economyClass;
+    @ElementCollection
+    @CollectionTable(name = "flight_businessClass",
+                     joinColumns = @JoinColumn(name = "flight_id"))
+    @Column(name = "businessClass")
+    private Set<String> businessClass;
+
 }

@@ -18,7 +18,10 @@ import lombok.ToString;
 public class PlaneDto {
     @JsonProperty("id")
     private UUID uuid;
+    private int size;
     private String planeNum;
     private Airport airport;
-    private Set<String> seats;
+    private Set<String> businessClass;
+    private Set<String> economyClass;
+    private Set<String> firstClass;
 }

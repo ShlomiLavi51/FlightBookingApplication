@@ -32,10 +32,11 @@ public class Card {
     private long id;
     @Column(length = 36, updatable = false, unique = true)
     private UUID uuid;
+    private double price;
     @ManyToOne
     private Airport airport;
     private String gate;
-    private String seat;
+    private SeatType seat;
     @JoinColumn(name = "flight_id")
     @ManyToOne
     private Flight flight;

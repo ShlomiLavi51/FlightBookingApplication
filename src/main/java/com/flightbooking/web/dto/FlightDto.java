@@ -5,6 +5,7 @@ import com.flightbooking.entity.Plane;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.Set;
 import java.util.UUID;
 
 import lombok.Builder;
@@ -25,4 +26,5 @@ public class FlightDto {
     private LocalDateTime landingTime;
     private Date flightTime;
     private Plane plane;
+    private Set<CardDto> card;
 }

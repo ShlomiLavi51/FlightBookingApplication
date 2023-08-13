@@ -16,4 +16,6 @@ public interface CustomerService {
     List<FlightDto> getAllByPrice(double price);
 
     void updateCustomer(UUID uuid);
+
+    Optional<CardDto> purchased(UUID cardUuid, UUID customerUuid);
 }
