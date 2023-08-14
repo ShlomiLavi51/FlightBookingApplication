@@ -7,12 +7,12 @@ import java.util.UUID;
 
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
-import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -41,20 +41,20 @@ public class Plane {
     private Airport airport;
     @OneToOne
     private Flight flight;
-    @ElementCollection
+    @OneToMany
     @CollectionTable(name = "flight_firstClass",
                      joinColumns = @JoinColumn(name = "flight_id"))
     @Column(name = "firstClass")
-    private Set<String> firstClass;
-    @ElementCollection
+    private Set<Card> firstClass;
+    @OneToMany
     @CollectionTable(name = "flight_economyClass",
                      joinColumns = @JoinColumn(name = "flight_id"))
     @Column(name = "economyClass")
-    private Set<String> economyClass;
-    @ElementCollection
+    private Set<Card> economyClass;
+    @OneToMany
     @CollectionTable(name = "flight_businessClass",
                      joinColumns = @JoinColumn(name = "flight_id"))
     @Column(name = "businessClass")
-    private Set<String> businessClass;
+    private Set<Card> businessClass;
 
 }

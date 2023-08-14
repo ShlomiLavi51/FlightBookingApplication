@@ -4,8 +4,10 @@ import com.flightbooking.entity.Card;
 import com.flightbooking.entity.Customer;
 import com.flightbooking.entity.Flight;
 import com.flightbooking.entity.Plane;
+import com.flightbooking.web.dto.CardDto;
 import com.flightbooking.web.dto.FlightDto;
 import com.flightbooking.web.dto.ManagerDto;
+import com.flightbooking.web.dto.PlaneDto;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -22,6 +24,10 @@ public interface ManagerService {
     FlightDto createFlight(
             FlightDto flightDto, double firstClass, double economyClass,
             double businessClass);
+
+    CardDto createCard(CardDto dto, UUID uuid , double firstClass, double economyClass, double businessClass);
+
+    PlaneDto createPlane(PlaneDto planeDto);
 
     void deleteFlight(UUID uuid);
 

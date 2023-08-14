@@ -3,6 +3,7 @@ package com.flightbooking.web.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.flightbooking.entity.Customer;
 import com.flightbooking.entity.Flight;
+import com.flightbooking.entity.SeatType;
 
 import java.util.UUID;
 
@@ -20,6 +21,8 @@ public class CardDto {
     private UUID uuid;
     private String gate;
     private String seat;
+    private SeatType seatType;
+    private double price;
     private Flight flight;
     private Customer customer;
 }
