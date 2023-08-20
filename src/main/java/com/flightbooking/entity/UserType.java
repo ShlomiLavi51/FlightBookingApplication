@@ -1,6 +1,6 @@
 package com.flightbooking.entity;
 
-public enum ClientType {
+public enum UserType {
     MANAGER,
     CUSTOMER
 }

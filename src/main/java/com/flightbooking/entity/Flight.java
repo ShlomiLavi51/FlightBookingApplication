@@ -33,6 +33,7 @@ public class Flight {
     private UUID uuid;
     @Column(nullable = false)
     private String flightNumber;
+    private double priceRange;
     @Column(nullable = false)
     private String destination;
     @ManyToOne

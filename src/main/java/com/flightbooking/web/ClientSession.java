@@ -1,7 +1,7 @@
 package com.flightbooking.web;
 
 
-import com.flightbooking.entity.ClientType;
+import com.flightbooking.entity.UserType;
 
 import java.util.UUID;
 
@@ -14,10 +14,10 @@ import lombok.Getter;
 public class ClientSession {
     private final UUID uuid;
     private long lastAccessedMillis;
-    private final ClientType clientType;
+    private final UserType userType;
 
-    public static ClientSession of(UUID uuid,ClientType clientType) {
-        return new ClientSession(uuid, System.currentTimeMillis(),clientType);
+    public static ClientSession of(UUID uuid,UserType userType) {
+        return new ClientSession(uuid, System.currentTimeMillis(),userType);
     }
 
     public void updateLastAccessedMillis() {

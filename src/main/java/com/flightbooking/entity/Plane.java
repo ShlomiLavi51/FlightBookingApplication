@@ -45,16 +45,19 @@ public class Plane {
     @CollectionTable(name = "flight_firstClass",
                      joinColumns = @JoinColumn(name = "flight_id"))
     @Column(name = "firstClass")
+    @ToString.Exclude
     private Set<Card> firstClass;
     @OneToMany
     @CollectionTable(name = "flight_economyClass",
                      joinColumns = @JoinColumn(name = "flight_id"))
     @Column(name = "economyClass")
+    @ToString.Exclude
     private Set<Card> economyClass;
     @OneToMany
     @CollectionTable(name = "flight_businessClass",
                      joinColumns = @JoinColumn(name = "flight_id"))
     @Column(name = "businessClass")
+    @ToString.Exclude
     private Set<Card> businessClass;
 
 }

@@ -26,5 +26,5 @@ public class FlightDto {
     private LocalDateTime landingTime;
     private Date flightTime;
     private Plane plane;
-    private Set<CardDto> card;
+    private Set<CardDto> cards;
 }

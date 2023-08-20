@@ -33,7 +33,9 @@ public class Airport {
     private UUID uuid;
     private String airportName;
     @OneToMany
+    @ToString.Exclude
     private Set<Flight> flights;
     @OneToMany
+    @ToString.Exclude
     private Set<Plane> planes;
 }

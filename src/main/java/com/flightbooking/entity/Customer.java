@@ -31,6 +31,7 @@ public class Customer {
     private long id;
     @Column(length = 36, updatable = false, unique = true)
     private UUID uuid;
+    private SeatType seatType;
     private String fullName;
     private String email;
     private String password;

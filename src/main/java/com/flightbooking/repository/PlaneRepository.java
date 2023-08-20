@@ -12,7 +12,7 @@ import java.util.UUID;
 public interface PlaneRepository extends JpaRepository<Plane,Long> {
     Optional<Plane> findByUuid(UUID uuid);
 
-    Plane findPlaneBySize(int size);
+    Optional<Plane> findPlaneBySize(int size);
 
     @Modifying
     @Query("delete from Plane c where c.uuid = ?1")

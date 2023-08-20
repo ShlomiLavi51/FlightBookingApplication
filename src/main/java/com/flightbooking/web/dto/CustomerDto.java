@@ -2,6 +2,7 @@ package com.flightbooking.web.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.flightbooking.entity.Card;
+import com.flightbooking.entity.SeatType;
 
 import java.util.UUID;
 
@@ -20,6 +21,7 @@ public class CustomerDto {
     private String fullName;
     private String email;
     private String password;
+    private SeatType seatType;
     @ToString.Exclude
     private Card card;
 }

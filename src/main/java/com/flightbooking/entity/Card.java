@@ -36,6 +36,7 @@ public class Card {
     @ManyToOne
     private Airport airport;
     private String gate;
+    private int amount;
     private SeatType seat;
     @JoinColumn(name = "flight_id")
     @ManyToOne
