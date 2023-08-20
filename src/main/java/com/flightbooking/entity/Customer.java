@@ -2,6 +2,7 @@ package com.flightbooking.entity;
 
 import org.springframework.data.annotation.Id;
 
+import java.util.Set;
 import java.util.UUID;
 
 import jakarta.persistence.Column;
@@ -9,7 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -35,8 +36,13 @@ public class Customer {
     private String fullName;
     private String email;
     private String password;
-    @OneToOne
+    @ManyToMany
     @JoinColumn(name = "card_id")
-    private Card card;
+    @ToString.Exclude
+    private Set<Card> card;
+
+    public void add(Card card) {
+        this.card.add(card);
+    }
 }
 

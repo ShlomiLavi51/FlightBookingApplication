@@ -1,9 +1,9 @@
 package com.flightbooking.service;
 
+import com.flightbooking.entity.SeatType;
 import com.flightbooking.web.dto.CardDto;
 import com.flightbooking.web.dto.CustomerDto;
 import com.flightbooking.web.dto.FlightDto;
-import com.flightbooking.web.dto.PlaneDto;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -16,13 +16,13 @@ public interface CustomerService {
 
     List<FlightDto> getAllByDate(LocalDateTime date);
 
-    List<FlightDto> getAllByPrice(double price,double price1);
+    List<FlightDto> getAllByPrice(double price, double price1);
 
     void updateCustomer(CustomerDto dto);
 
-    Optional<CardDto> purchased(UUID cardUuid, UUID customerUuid);
+    CardDto purchased(UUID cardUuid, UUID customerUuid, SeatType seatType);
 
-    Set<PlaneDto> findFlightByDepartureTime(LocalDateTime departure);
+    Set<FlightDto> findFlightByDepartureTime(LocalDateTime departure);
 
     Optional<CardDto> findBySeat(String seat);
 

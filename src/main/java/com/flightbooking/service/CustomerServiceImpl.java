@@ -3,20 +3,16 @@ package com.flightbooking.service;
 import com.flightbooking.entity.Card;
 import com.flightbooking.entity.Customer;
 import com.flightbooking.entity.Flight;
+import com.flightbooking.entity.SeatType;
 import com.flightbooking.mapper.CardMapper;
 import com.flightbooking.mapper.FlightMapper;
-import com.flightbooking.mapper.PlaneMapper;
-import com.flightbooking.repository.AirportRepository;
 import com.flightbooking.repository.CardRepository;
 import com.flightbooking.repository.CustomerRepository;
 import com.flightbooking.repository.FlightRepository;
-import com.flightbooking.repository.ManagerRepository;
-import com.flightbooking.repository.PlaneRepository;
 import com.flightbooking.service.ex.NotFoundException;
 import com.flightbooking.web.dto.CardDto;
 import com.flightbooking.web.dto.CustomerDto;
 import com.flightbooking.web.dto.FlightDto;
-import com.flightbooking.web.dto.PlaneDto;
 
 import org.springframework.stereotype.Service;
 
@@ -25,6 +21,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import lombok.AllArgsConstructor;
 
@@ -34,11 +31,7 @@ public class CustomerServiceImpl implements CustomerService {
     private final FlightRepository flightRepository;
     private final CardRepository cardRepository;
     private final CustomerRepository customerRepository;
-    private final ManagerRepository managerRepository;
-    private final AirportRepository airportRepository;
-    private final PlaneRepository planeRepository;
     private final FlightMapper flightMapper;
-    private final PlaneMapper planeMapper;
     private final CardMapper cardMapper;
 
 
@@ -94,7 +87,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Optional<CardDto> purchased(UUID flightUuid, UUID customerUuid) {
+    public CardDto purchased(UUID flightUuid, UUID customerUuid, SeatType seatType) {
         Customer customer = customerRepository.findByUuid(customerUuid)
                                               .orElseThrow(() -> new NotFoundException(
                                                       "Customer with UUID "
@@ -106,17 +99,38 @@ public class CustomerServiceImpl implements CustomerService {
                                                 + flightUuid
                                                 + " not found"));
 
+        Card card = flight.getCards()
+                          .stream()
+                          .filter(c -> c.getSeatType() == seatType
+                                       && !c.isSeatTaken())
+                          .findFirst()
+                          .orElseThrow(() -> new NotFoundException("No available seat "
+                                                                   + "for this type"
+                                                                   + seatType));
 
+        customer.add(card);
+        card.setSeatTaken(true);
+        card.setCustomer(customer);
+        cardRepository.save(card);
+        customerRepository.save(customer);
 
+        return cardMapper.map(card);
     }
 
     @Override
-    public Set<PlaneDto> findFlightByDepartureTime(LocalDateTime departure) {
-        return null;
+    public Set<FlightDto> findFlightByDepartureTime(LocalDateTime departure) {
+        Set<FlightDto> flightDto = flightRepository.findFlightsByDepartureTimeBefore(
+                departure).stream().map(flightMapper::map).collect(Collectors.toSet());
+        if (flightDto.isEmpty()) {
+            throw new NotFoundException("No flights available for the given date.");
+        }
+        return flightDto;
     }
 
     @Override
     public Optional<CardDto> findBySeat(String seat) {
+
         return Optional.empty();
     }
+
 }
