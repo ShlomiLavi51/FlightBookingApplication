@@ -25,4 +25,10 @@ public interface FlightRepository extends JpaRepository<Flight, Long> {
     void deleteByUuid(UUID uuid);
 
     List<Flight> findFlightsByPriceRangeBetween(double price, double price1);
+
+
+
+
+
+
 }

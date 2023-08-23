@@ -128,8 +128,21 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Optional<CardDto> findBySeat(String seat) {
-
+    public Optional<CardDto> findBySeat(UUID uuid, String seat) {
+        List<CardDto> cardDto;
+        if (flightRepository.findByUuid(uuid).isPresent()) {
+            cardDto = flightRepository.findByUuid(uuid).get().getCards().stream().map(
+                    cardMapper::map).toList();
+        } else {
+            throw new NotFoundException("No flights available for the given uuid.");
+        }
+        for (CardDto dto : cardDto) {
+            if (dto.getSeat().equals(seat)) {
+                return Optional.of(dto);
+            }else {
+                throw new NotFoundException("No seat available for the given seat.");
+            }
+        }
         return Optional.empty();
     }
 

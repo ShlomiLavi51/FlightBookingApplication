@@ -24,6 +24,6 @@ public interface CustomerService {
 
     Set<FlightDto> findFlightByDepartureTime(LocalDateTime departure);
 
-    Optional<CardDto> findBySeat(String seat);
+    Optional<CardDto> findBySeat(UUID uuid,String seat);
 
 }
